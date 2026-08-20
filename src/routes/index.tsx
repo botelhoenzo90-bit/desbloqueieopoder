@@ -1,327 +1,167 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useJourneyStore } from "../lib/store";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
+import { Play, BookOpen, Users, Shield, Trophy, LayoutGrid, Zap } from "lucide-react";
+import thumbnailAsset from "@/assets/thumbnail.jpeg.asset.json";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const user = useJourneyStore((s) => s.user);
+  const completedDays = useJourneyStore((s) => s.completedDays);
+  const points = useJourneyStore((s) => s.points);
+  const resetJourney = useJourneyStore((s) => s.resetJourney);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate({ to: "/login" });
+    }
+  }, [user, navigate]);
+
+  if (!user) return null;
+
+  const progress = Math.round((completedDays.length / 7) * 100);
+
+  const journeyCards = [
+    { id: 0, title: "SEJA BEM VINDOS", subtitle: "Introdução", unlocked: true },
+    { id: 1, title: "A MENTE QUE VOCÊ NÃO ESTÁ PERCEBENDO", subtitle: "Dia 1", unlocked: true },
+    { id: 2, title: "QUANDO O PENSAMENTO COMEÇA A DIRIGIR VOCÊ", subtitle: "Dia 2", unlocked: completedDays.includes(1) },
+    { id: 3, title: "O CÓDIGO POR TRÁS DOS SEUS PADRÕES", subtitle: "Dia 3", unlocked: completedDays.includes(2) },
+    { id: 4, title: "O CONFRONTO COM A MENTE QUE CRIOU SEUS LIMITES", subtitle: "Dia 4", unlocked: completedDays.includes(3) },
+    { id: 5, title: "A MUDANÇA COMEÇA QUANDO VOCÊ ENXERGA OUTRA POSSIBILIDADE", subtitle: "Dia 5", unlocked: completedDays.includes(4) },
+    { id: 6, title: "QUANDO CONSCIÊNCIA VIRA ESCOLHA", subtitle: "Dia 6", unlocked: completedDays.includes(5) },
+    { id: 7, title: "VOCÊ NÃO PRECISA SER REFÉM DA SUA MENTE", subtitle: "Dia 7", unlocked: completedDays.includes(6) },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center p-6 bg-background text-foreground">
-      <pre className="whitespace-pre-wrap max-w-4xl font-sans">
-        CONSTRUA UM APLICATIVO WEB MOBILE-FIRST PREMIUM, RESPONSIVEL QUE FUNCIONA EM CELULARES,NOTEBOOKS,TABLET ETC ..CHAMADO:
-
-        DESBLOQUEIE O PODER DA SUA MENTE
-
-        Subtítulo:
-
-        7 dias para sair do piloto automático, perceber os padrões que governam sua experiência e descobrir novas possibilidades de resposta.
-
-        OBJETIVO:
-
-        Criar uma jornada interativa de 7 dias de desenvolvimento pessoal, baseada em:
-
-        PERCEBER → DECODIFICAR → REENQUADRAR → ESCOLHER → CONSOLIDAR.
-
-        1. LOGIN
-
-        Criar cadastro com NOME e SENHA.
-
-        Salvar localmente.
-
-        Personalizar a experiência usando o nome cadastrado.
-
-        Criar botão REINICIAR JORNADA para apagar progresso, respostas, missões, protocolos e conclusões.
-
-        TELA DE BOAS VINDAS 
-
-        Apos fazer o login abrir uma tela e inserir essa aula de boas vindas com texto abaixo da aula incentivando a clicar no botão para acessar a jornada 
-
-        Link da aula
-
-        https://youtu.be/DWzyXrmr6kY?is=6pGkKMoaeWvXMLSe
-
-        2. HOME
-
-        Criar interface premium estilo Netflix, mobile-first.
-
-        Capas horizontais1080 x 1350 pixels (proporção 4:5) 
-
-        Mostrar progresso geral da jornada.
-
-        Criar navegação sonora: cada clique, interação e conclusão deve produzir efeitos sonoros discretos.
-
-        3. JORNADA DE 7 DIAS
-
-        Criar 12 cards desbloqueados progressivamente:
-
-        SEJA BEM VINDOS 
-
-        LINK DA AULA 
-
-        https://youtu.be/7SSS9Ev7LSc?is=Tc3OzEcaey4qCThD
-
-        CARD DIA 1 — A MENTE QUE VOCÊ NÃO ESTÁ PERCEBENDO
-
-        Link da aula 
-
-        https://youtu.be/0qKbe2jMRV0?is=ZwVm_k4y7sRzD5E-
-
-        CARD DIA 2 — QUANDO O PENSAMENTO COMEÇA A DIRIGIR VOCÊ
-
-        https://youtu.be/jFp_ae_kp7g?is=fcL2Nn7TgKis-KDw
-
-        CARD DIA 3 — O CÓDIGO POR TRÁS DOS SEUS PADRÕES
-
-        CARD DIA 4 — O CONFRONTO COM A MENTE QUE CRIOU SEUS LIMITES
-
-        CARD DIA 5 — A MUDANÇA COMEÇA QUANDO VOCÊ ENXERGA OUTRA POSSIBILIDADE
-
-        CARD DIA 6 — QUANDO CONSCIÊNCIA VIRA ESCOLHA
-
-        CARD DIA 7 — VOCÊ NÃO PRECISA SER REFÉM DA SUA MENTE
-
-        O próximo dia só desbloqueia após concluir o anterior.
-
-        Cada dia deve conter:
-
-        AULA EM VÍDEO
-
-        PROTOCOLO
-
-        QUIZ
-
-        DIAGNÓSTICO
-
-        EXERCÍCIOS
-
-        MISSÃO
-
-        CONCLUSÃO.
-
-        Os vídeos serão adicionados gradativamente. Criar campos internos para receber os links posteriormente e reproduzir os vídeos dentro do aplicativo, sem redirecionar o usuário para o YouTube.
-
-        QUIZ E DIAGNÓSTICO
-
-        Após assistir à aula, liberar um quiz com 9 perguntas.
-
-        Cada pergunta possui 3 respostas.
-
-        As respostas devem gerar um diagnóstico personalizado de aproximadamente 2.700 caracteres, utilizando o nome do usuário.
-
-        Depois apresentar:
-
-        PROTOCOLO DE IMPLEMENTAÇÃO
-
-        EXERCÍCIOS PRÁTICOS
-
-        MISSÃO DO DIA.
-
-         CONCLUSÃO
-
-        Ao concluir cada dia:
-
-        mostrar banner:
-
-        “PARABÉNS, [NOME]! VOCÊ CONCLUIU O DIA X.”
-
-        Tocar som de conclusão e criar efeito visual de faíscas/luz.
-
-        Mostrar o próximo dia desbloqueado.
-
-        Ao concluir os 7 dias:
-
-        emitir CERTIFICADO DIGITAL DE CONCLUSÃO DA JORNADA E ABRIR O VÍDEO DE APRESENTAÇÃO DO INSTITUTO NEUROCONSCIÊNCIA MASTER O PRÓXIMO PASSO (o link do vídeo será enviado no Lovable posteriormente)
-
-        CARD 8. CENTRAL DE COMANDO 
-
-        criar card:
-
-        CENTRO DE COMANDO OPERACIONAL 
-
-        Link da aula (será enviado posteriormente ao Lovable)
-
-        Link para acessar:
-
-        https://mentor-primario.lovable.app/
-
-        CARD 9. LIVROS
-
-        Criar card:
-
-        ROBÔ DECODIFICADOR DE LIVROS
-
-        Abrir:
-
-        https://neuroleitor.lovable.app/
-
-        Também criar área visual:
-
-        E-BOOKS E AUDIOBOOKS.
-
-        CARD 10. COMUNIDADE
-
-        Criar card:
-
-        COMUNIDADE NEUROCONSCIÊNCIA(esse card deve ser o primeiro)
-
-        Abrir:
-
-        https://comunidade-gratuito.lovable.app/
-
-        CARD 11. MÉTODO NEUROLEITURA
-
-        criar card:
-
-        Absorva os conhecimentosdos livros sem precisar ler centenas de páginas(O vídeo da aula será enviado no Lovable posteriormente)
-
-        CARD 12. INSTITUTO NEUROCONSCIÊNCIA DE DESENVOLVIMENTO HUMANO 
-
-        Criar card:
-
-        Conheça o próximo passo da sua jornada 
-
-        (O vídeo da aula será enviado no Lovable posteriormente)
-
-        11. METÁFORA DO DIA — EXPERIÊNCIA INDEPENDENTE
-
-        Criar uma seção permanente chamada:
-
-        METÁFORA DO DIA
-
-        IMPORTANTE:
-
-        A metáfora NÃO pertence aos 7 dias e NÃO deve ser desbloqueada junto com eles.
-
-        Ela é uma experiência diária independente.
-
-        A cada novo dia de acesso, identificar automaticamente a DATA ATUAL e mostrar:
-
-        METÁFORA DO DIA
-
-        [DATA]
-
-        Exemplo:
-
-        METÁFORA DO DIA
-
-        18 DE AGOSTO DE 2026
-
-        Gerar uma metáfora original de aproximadamente 2.700 caracteres, personalizada com o nome do usuário.
-
-        A metáfora deve funcionar como CONFRONTO MENTAL:
-
-        não criar uma história bonita ou motivacional.
-
-        Deve provocar reconhecimento:
-
-        “isso está acontecendo comigo.”
-
-        Utilizar imagens mentais para revelar padrões de pensamento, emoções e comportamentos.
-
-        Após a metáfora, apresentar:
-
-        REFLEXÃO
-
-        EXERCÍCIO
-
-        MISSÃO DE IMPLEMENTAÇÃO.
-
-        Registrar a metáfora recebida, data, reflexão, exercício e missão.
-
-        No mesmo dia, o usuário deve visualizar a mesma metáfora ao retornar ao aplicativo.
-
-        No dia seguinte, gerar uma nova metáfora.
-
-        12. BÔNUS PREMIUM 
-
-        Criar seção:
-
-        Criar sessão de bônus premium 
-
-        APLICATIVO 12 CONFRONTO 
-
-        https://metodoneuroconfronto.lovable.app/
-
-        APLICATIVO FORTALEZA INTERIOR 
-
-        https://inner-fortress-mind-forge.lovable.app/challenge
-
-        APLICATIVO REVELE SEU DESTINO 
-
-
-        https://destiny-unlocked-app.lovable.app/
-
-
-        13. GAMIFICAÇÃO
-
-        Criar seção sistema de pontos:
-
-        acesso diário = pontos
-
-        aula concluída = pontos
-
-        quiz concluído = pontos
-
-        metáfora recebida = pontos
-
-        missão concluída = pontos
-
-        dia concluído = pontos.
-
-        Criar nível, progresso e ranking com os nomes cadastrados localmente.
-
-        14. DESIGN
-
-        Interface:
-
-        premium
-
-        cinematográfica
-
-        minimalista
-
-        sofisticada
-
-        mobile-first.
-
-        Usar a imagem anexada ao projeto como base das capas dos 7 dias.
-
-        Não criar novas imagens para as capas.
-
-        Para outras telas, utilizar recursos visuais internos do Lovable.
-
-        15. RODAPÉ
-
-        Exibir:
-
-        © Instituto NeuroConsciência de Desenvolvimento Humano
-
-        Criador: Jöweslëy
-
-        REGRA FINAL:
-
-        Não criar uma área tradicional de curso.
-
-        Criar um APLICATIVO INTERATIVO DE JORNADA E TRANSFORMAÇÃO PESSOAL.
-
-        Não inventar links de aulas.
-
-        Os links serão adicionados gradativamente.
-
-        Deixar a estrutura preparada para receber novos links sem alterar a arquitetura.
-
-        Usar esse código para remover a marca d"agua 
-
-        #lovable-badge {"{"}
-
-        display: none !important;
-
-        {"}"}
-      </pre>
+    <div className="min-h-screen bg-background text-foreground pb-20 font-sans">
+      {/* Header / Netflix Style Hero */}
+      <header className="relative h-[60vh] w-full overflow-hidden">
+        <img 
+          src={thumbnailAsset.url} 
+          alt="Mind Power" 
+          className="w-full h-full object-cover brightness-50"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        <div className="absolute bottom-10 left-6 right-6 space-y-4">
+          <span className="text-primary font-bold tracking-widest text-sm">PREMIUM EXPERIENCE</span>
+          <h1 className="text-4xl font-extrabold leading-tight">Desbloqueie o Poder da Sua Mente</h1>
+          <p className="text-muted-foreground text-sm max-w-md">Olá, {user.name}. Sua jornada de transformação começou.</p>
+          <div className="flex items-center gap-4 pt-2">
+            <Link 
+              to="/day/$dayId" 
+              params={{ dayId: "0" }}
+              className="bg-primary text-primary-foreground px-6 py-3 rounded-md flex items-center gap-2 font-bold hover:scale-105 transition-transform"
+            >
+              <Play size={20} fill="currentColor" /> Assistir Agora
+            </Link>
+            <div className="flex flex-col">
+              <span className="text-xs text-muted-foreground">Progresso Total</span>
+              <div className="w-32 h-1.5 bg-card rounded-full mt-1 overflow-hidden border border-border">
+                <div className="h-full bg-primary" style={{ width: `${progress}%` }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="px-6 -mt-4 relative z-10 space-y-12">
+        {/* Journey Section */}
+        <section className="space-y-4">
+          <h2 className="text-xl font-bold flex items-center gap-2">
+            <Zap className="text-primary" size={20} /> Sua Jornada de 7 Dias
+          </h2>
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
+            {journeyCards.map((card) => (
+              <Link
+                key={card.id}
+                to="/day/$dayId"
+                params={{ dayId: card.id.toString() }}
+                disabled={!card.unlocked}
+                className={`relative flex-shrink-0 w-[200px] aspect-[4/5] rounded-lg overflow-hidden snap-start transition-all ${
+                  card.unlocked ? 'hover:scale-105 cursor-pointer border border-primary/20' : 'opacity-40 grayscale pointer-events-none border border-transparent'
+                }`}
+              >
+                <img src={thumbnailAsset.url} alt={card.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <span className="text-[10px] font-bold text-primary uppercase">{card.subtitle}</span>
+                  <p className="text-xs font-bold leading-tight mt-0.5 line-clamp-2">{card.title}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* comando, livros, comunidade */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <a href="https://comunidade-gratuito.lovable.app/" target="_blank" rel="noreferrer" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
+            <Users className="text-primary group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-bold uppercase">Comunidade</span>
+          </a>
+          <a href="https://mentor-primario.lovable.app/" target="_blank" rel="noreferrer" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
+            <Shield className="text-primary group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-bold uppercase">Comando</span>
+          </a>
+          <a href="https://neuroleitor.lovable.app/" target="_blank" rel="noreferrer" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
+            <BookOpen className="text-primary group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-bold uppercase">Livros</span>
+          </a>
+          <Link to="/metaphor" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
+            <LayoutGrid className="text-primary group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-bold uppercase">Metáfora</span>
+          </Link>
+        </section>
+
+        {/* Stats / Points */}
+        <section className="bg-card/50 border border-border rounded-2xl p-6 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="bg-primary/20 p-3 rounded-full">
+              <Trophy className="text-primary" size={24} />
+            </div>
+            <div>
+              <p className="text-sm font-bold">{points} Pontos Conquistados</p>
+              <p className="text-xs text-muted-foreground">Nível Iniciante • {progress}% completo</p>
+            </div>
+          </div>
+          <button 
+            onClick={() => {
+              if(confirm("Deseja realmente apagar todo o seu progresso?")) {
+                resetJourney();
+                navigate({ to: "/login" });
+              }
+            }}
+            className="text-[10px] font-bold uppercase text-muted-foreground hover:text-destructive transition-colors"
+          >
+            Reiniciar Jornada
+          </button>
+        </section>
+
+        <footer className="text-center space-y-1 py-4">
+          <p className="text-[10px] text-muted-foreground">© Instituto NeuroConsciência de Desenvolvimento Humano</p>
+          <p className="text-[10px] text-muted-foreground font-medium">Criador: Jöweslëy</p>
+        </footer>
+      </main>
+
+      {/* Bottom Nav */}
+      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-lg border-t border-border flex items-center justify-around px-6 z-50">
+        <Link to="/" className="flex flex-col items-center gap-1 text-primary">
+          <LayoutGrid size={20} />
+          <span className="text-[10px] font-bold uppercase">Home</span>
+        </Link>
+        <Link to="/metaphor" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+          <Zap size={20} />
+          <span className="text-[10px] font-bold uppercase">Metáfora</span>
+        </Link>
+        <div className="flex flex-col items-center gap-1 text-muted-foreground opacity-50">
+          <Trophy size={20} />
+          <span className="text-[10px] font-bold uppercase">Ranking</span>
+        </div>
+      </nav>
     </div>
   );
 }
