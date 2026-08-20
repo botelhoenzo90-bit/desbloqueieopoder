@@ -316,11 +316,11 @@ function Index() {
 
         Usar esse código para remover a marca d"agua 
 
-        #lovable-badge {
+        #lovable-badge {"{"}
 
         display: none !important;
 
-        }
+        {"}"}
       </pre>
     </div>
   );
