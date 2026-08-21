@@ -142,6 +142,11 @@ function DayJourney() {
       origin: { y: 0.6 },
       colors: ['#FFD700', '#FFFFFF', '#4A90E2', '#B8860B']
     });
+
+    if (id === 7) {
+      alert("Parabéns! Você completou a jornada de 7 dias. Seu certificado digital foi gerado e agora você pode conhecer o próximo passo no Instituto.");
+    }
+
     setStep("conclusion");
   };
 
