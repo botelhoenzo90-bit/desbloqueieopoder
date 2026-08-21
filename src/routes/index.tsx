@@ -184,18 +184,18 @@ function Index() {
 
       {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 h-16 bg-background/80 backdrop-blur-lg border-t border-border flex items-center justify-around px-6 z-50">
-        <Link to="/" className="flex flex-col items-center gap-1 text-primary">
+        <Link to="/" className="flex flex-col items-center gap-1 text-primary" onClick={() => playSound('click')}>
           <LayoutGrid size={20} />
-          <span className="text-[10px] font-bold uppercase">Home</span>
+          <span className="text-[10px] font-black uppercase tracking-widest">Home</span>
         </Link>
-        <Link to="/metaphor" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+        <Link to="/metaphor" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors" onClick={() => playSound('click')}>
           <Zap size={20} />
-          <span className="text-[10px] font-bold uppercase">Metáfora</span>
+          <span className="text-[10px] font-black uppercase tracking-widest">Metáfora</span>
         </Link>
-        <div className="flex flex-col items-center gap-1 text-muted-foreground opacity-50">
+        <Link to="/ranking" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors" onClick={() => playSound('click')}>
           <Trophy size={20} />
-          <span className="text-[10px] font-bold uppercase">Ranking</span>
-        </div>
+          <span className="text-[10px] font-black uppercase tracking-widest">Ranking</span>
+        </Link>
       </nav>
     </div>
   );
