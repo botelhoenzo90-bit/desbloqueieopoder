@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MetaphorRouteImport } from './routes/metaphor'
+import { Route as RankingRouteImport } from './routes/ranking'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as DayDayIdRouteImport } from './routes/day.$dayId'
 
@@ -30,6 +31,11 @@ const MetaphorRoute = MetaphorRouteImport.update({
   path: '/metaphor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RankingRoute = RankingRouteImport.update({
+  id: '/ranking',
+  path: '/ranking',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WelcomeRoute = WelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/metaphor': typeof MetaphorRoute
+  '/ranking': typeof RankingRoute
   '/welcome': typeof WelcomeRoute
   '/day/$dayId': typeof DayDayIdRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/metaphor': typeof MetaphorRoute
+  '/ranking': typeof RankingRoute
   '/welcome': typeof WelcomeRoute
   '/day/$dayId': typeof DayDayIdRoute
 }
@@ -60,21 +68,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/metaphor': typeof MetaphorRoute
+  '/ranking': typeof RankingRoute
   '/welcome': typeof WelcomeRoute
   '/day/$dayId': typeof DayDayIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/metaphor' | '/welcome' | '/day/$dayId'
+  fullPaths:
+    '/' | '/login' | '/metaphor' | '/ranking' | '/welcome' | '/day/$dayId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/metaphor' | '/welcome' | '/day/$dayId'
-  id: '__root__' | '/' | '/login' | '/metaphor' | '/welcome' | '/day/$dayId'
+  to: '/' | '/login' | '/metaphor' | '/ranking' | '/welcome' | '/day/$dayId'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/metaphor'
+    | '/ranking'
+    | '/welcome'
+    | '/day/$dayId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   MetaphorRoute: typeof MetaphorRoute
+  RankingRoute: typeof RankingRoute
   WelcomeRoute: typeof WelcomeRoute
   DayDayIdRoute: typeof DayDayIdRoute
 }
@@ -102,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MetaphorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ranking': {
+      id: '/ranking'
+      path: '/ranking'
+      fullPath: '/ranking'
+      preLoaderRoute: typeof RankingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/welcome': {
       id: '/welcome'
       path: '/welcome'
@@ -123,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   MetaphorRoute: MetaphorRoute,
+  RankingRoute: RankingRoute,
   WelcomeRoute: WelcomeRoute,
   DayDayIdRoute: DayDayIdRoute,
 }
