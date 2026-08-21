@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 interface User {
   name: string;
-  password?: string;
+  password?: string | null;
   points: number;
 }
 
@@ -40,7 +40,7 @@ export const useJourneyStore = create<JourneyState>()(
       unlockedMetaphors: {},
       completedMissions: [],
 
-      login: (name, password) => set({ user: { name, password, points: 0 } }),
+      login: (name, password) => set({ user: { name, password: password || null, points: 0 } }),
       
       addPoints: (amount) => set((state) => ({ 
         points: state.points + amount,
