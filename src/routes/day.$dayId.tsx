@@ -3,7 +3,7 @@ import { playSound } from "../lib/audio";
 import { useJourneyStore } from "../lib/store";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronLeft, Play, FileText, CheckCircle2, Award, Zap, ArrowRight, Brain } from "lucide-react";
+import { ChevronLeft, Play, FileText, CheckCircle2, Award, Zap, ArrowRight, Brain, Target } from "lucide-react";
 import confetti from "canvas-confetti";
 
 export const Route = createFileRoute("/day/$dayId")({
