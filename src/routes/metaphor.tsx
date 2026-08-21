@@ -26,14 +26,14 @@ function MetaphorPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (unlockedMetaphors[today]) {
+    if (unlockedMetaphors && unlockedMetaphors[today]) {
       setCurrentMetaphor(unlockedMetaphors[today]);
       setLoading(false);
     } else {
       // Generate new metaphor
       const newMetaphor = {
         date: today,
-        text: `VOCÊ É UM PRISIONEIRO QUE SE APAIXONOU PELA GRADE DA PRÓPRIA CELA, ${user?.name?.toUpperCase()}. A cada manhã, você acorda e confere se os cadeados dos seus hábitos ainda estão trancados, sentindo um alívio doentio ao perceber que nada mudou. Sua mente construiu um labirinto onde todas as saídas estão pintadas na parede - elas parecem reais até que você tente atravessá-las. ${".".repeat(2500)} Este confronto não é para te dar esperança, é para te tirar o sono. Você está vivendo uma vida de segunda mão, repetindo os roteiros que te deram antes mesmo de você saber ler. A pergunta não é se você pode sair. A pergunta é: quem é você sem a sua cela?`,
+        text: `VOCÊ É UM PRISIONEIRO QUE SE APAIXONOU PELA GRADE DA PRÓPRIA CELA, ${user?.name?.toUpperCase() || 'VIAJANTE'}. A cada manhã, você acorda e confere se os cadeados dos seus hábitos ainda estão trancados, sentindo um alívio doentio ao perceber que nada mudou. Sua mente construiu um labirinto onde todas as saídas estão pintadas na parede - elas parecem reais até que você tente atravessá-las. ${".".repeat(2500)} Este confronto não é para te dar esperança, é para te tirar o sono. Você está vivendo uma vida de segunda mão, repetindo os roteiros que te deram antes mesmo de você saber ler. A pergunta não é se você pode sair. A pergunta é: quem é você sem a sua cela?`,
         reflection: "O que em você morreria se você parasse de reclamar da sua vida hoje?",
         exercise: "Fique 5 minutos olhando para uma parede branca sem se mover ou pensar em planos.",
         mission: "Identifique a mentira que você conta para si mesmo para não precisar agir agora."
