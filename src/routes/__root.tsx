@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Desbloqueie o Poder da Sua Mente" },
+      { name: "description", content: "7 dias para sair do piloto automático e descobrir novas possibilidades." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Desbloqueie o Poder da Sua Mente" },
+      { property: "og:description", content: "Jornada interativa de 7 dias de desenvolvimento pessoal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -119,7 +119,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="dark">
+      <div className="dark min-h-screen bg-background text-foreground">
+        <style>{`
+          #lovable-badge { display: none !important; }
+          ::-webkit-scrollbar { display: none; }
+          * { -ms-overflow-style: none; scrollbar-width: none; }
+        `}</style>
         <Outlet />
       </div>
     </QueryClientProvider>

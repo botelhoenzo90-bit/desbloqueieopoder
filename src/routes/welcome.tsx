@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useJourneyStore } from "../lib/store";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
+import { playSound } from "../lib/audio";
 
 export const Route = createFileRoute("/welcome")({
   component: Welcome,
@@ -48,10 +49,13 @@ function Welcome() {
             Esta jornada de 7 dias foi desenhada para reprogramar seus padrões mentais. Clique no botão abaixo para começar.
           </p>
           <button 
-            onClick={() => navigate({ to: "/" })}
-            className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-bold uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+            onClick={() => {
+              playSound('click');
+              navigate({ to: "/" });
+            }}
+            className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-black uppercase tracking-[0.2em] italic text-xs hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-xl shadow-primary/20"
           >
-            Começar a Jornada <Play size={18} fill="currentColor" />
+            Acessar a Jornada <Play size={16} fill="currentColor" />
           </button>
         </motion.div>
       </main>

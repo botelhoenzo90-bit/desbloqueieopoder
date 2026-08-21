@@ -9,12 +9,15 @@ export const Route = createFileRoute("/login")({
 
 function Login() {
   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const login = useJourneyStore((s) => s.login);
+  const addPoints = useJourneyStore((s) => s.addPoints);
   const router = useRouter();
 
   const handleLogin = () => {
-    if (name.trim()) {
-      login(name);
+    if (name.trim() && password.trim()) {
+      login(name, password);
+      addPoints(50); // Acesso inicial / cadastro
       router.navigate({ to: "/welcome" });
     }
   };
@@ -33,11 +36,18 @@ function Login() {
             placeholder="Digite seu nome"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full p-4 rounded-lg bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-4 rounded-lg bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary uppercase font-bold text-sm tracking-widest"
+          />
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-4 rounded-lg bg-card border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary uppercase font-bold text-sm tracking-widest"
           />
           <button
             onClick={handleLogin}
-            className="w-full p-4 rounded-lg bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity"
+            className="w-full p-4 rounded-lg bg-primary text-primary-foreground font-black uppercase tracking-[0.2em] hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
           >
             Entrar na Jornada
           </button>
