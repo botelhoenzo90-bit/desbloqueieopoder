@@ -11,6 +11,14 @@ export const Route = createFileRoute("/day/$dayId")({
 });
 
 const JOURNEY_DATA: Record<string, any> = {
+  "10": {
+    title: "COMUNIDADE NEUROCONSCIÊNCIA",
+    video: "https://www.youtube.com/embed/placeholder_comunidade",
+    protocol: "Conecte-se com outros buscadores. A egrégora acelera a transformação.",
+    exercise: "Apresente-se na comunidade e compartilhe sua intenção para estes 7 dias.",
+    mission: "Comente em um post de outra pessoa oferecendo apoio.",
+    quiz: Array(9).fill({ q: "Pergunta sobre comunidade...", a: ["Opção A", "Opção B", "Opção C"] })
+  },
   "0": {
     title: "SEJA BEM VINDOS",
     video: "https://www.youtube.com/embed/7SSS9Ev7LSc",
@@ -314,21 +322,32 @@ function DayJourney() {
               animate={{ opacity: 1, scale: 1 }}
               className="flex flex-col items-center justify-center text-center space-y-6 py-12"
             >
-              <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center text-primary mb-2">
-                <Award size={48} />
+              <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center text-primary mb-2 shadow-xl shadow-primary/20">
+                {parseInt(dayId) === 7 ? <Award size={48} className="animate-pulse" /> : <CheckCircle2 size={48} />}
               </div>
-              <div className="space-y-2">
-                <h2 className="text-3xl font-black uppercase italic tracking-tighter">Parabéns, {user?.name}!</h2>
-                <p className="text-muted-foreground uppercase text-xs font-bold">Você concluiu o Dia {dayId}</p>
+              <div className="space-y-2 px-4">
+                <h2 className="text-3xl font-black uppercase italic tracking-tighter">Parabéns, {user?.name?.split(' ')[0]}!</h2>
+                <p className="text-muted-foreground uppercase text-[10px] font-bold tracking-[0.3em]">Você concluiu o Dia {dayId}</p>
               </div>
-              <div className="bg-card border border-border rounded-xl p-4 max-w-xs">
-                <p className="text-[10px] text-muted-foreground text-left leading-relaxed">
+              
+              {parseInt(dayId) === 7 && (
+                <div className="bg-primary/10 border border-primary/30 p-4 rounded-xl max-w-xs animate-bounce">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-primary">Certificado Digital Disponível</p>
+                </div>
+              )}
+
+              <div className="bg-card border border-border rounded-xl p-6 max-w-sm shadow-2xl overflow-y-auto max-h-[300px]">
+                <p className="text-[10px] text-muted-foreground text-left leading-relaxed font-medium uppercase tracking-wider whitespace-pre-wrap">
                   {generateDiagnosis()}
                 </p>
               </div>
+              
               <button 
-                onClick={() => navigate({ to: "/" })}
-                className="w-full py-4 border border-primary text-primary rounded-xl font-bold uppercase tracking-widest hover:bg-primary/10 transition-colors"
+                onClick={() => {
+                  playSound('click');
+                  navigate({ to: "/" });
+                }}
+                className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-black uppercase tracking-[0.2em] italic text-xs shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform"
               >
                 Voltar à Central
               </button>
