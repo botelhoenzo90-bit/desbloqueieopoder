@@ -26,8 +26,9 @@ function MetaphorPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (unlockedMetaphors && unlockedMetaphors[today]) {
-      setCurrentMetaphor(unlockedMetaphors[today]);
+    const todayStr = String(today);
+    if (unlockedMetaphors && unlockedMetaphors[todayStr]) {
+      setCurrentMetaphor(unlockedMetaphors[todayStr]);
       setLoading(false);
     } else {
       // Generate new metaphor
@@ -39,7 +40,8 @@ function MetaphorPage() {
         mission: "Identifique a mentira que você conta para si mesmo para não precisar agir agora."
       };
       
-      saveMetaphor(today, newMetaphor);
+      const todayStr = String(today);
+      saveMetaphor(todayStr, newMetaphor);
       addPoints(100);
       playSound('unlock');
       setCurrentMetaphor(newMetaphor);
