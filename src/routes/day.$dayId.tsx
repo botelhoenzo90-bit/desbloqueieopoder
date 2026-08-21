@@ -2,9 +2,9 @@ import { createFileRoute, useParams, useNavigate, Link } from "@tanstack/react-r
 import { useJourneyStore } from "../lib/store";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { playSound } from "../lib/audio";
 import { ChevronLeft, Play, FileText, CheckCircle2, Award, Zap, ArrowRight, Brain, Target } from "lucide-react";
 import confetti from "canvas-confetti";
+import { playSound } from "../lib/audio";
 
 export const Route = createFileRoute("/day/$dayId")({
   component: DayJourney,
