@@ -119,14 +119,14 @@ function DayJourney() {
   const data = JOURNEY_DATA[dayId] || JOURNEY_DATA["0"];
 
   const generateDiagnosis = () => {
-    const text = `ANÁLISE PROFUNDA PARA ${user?.name?.toUpperCase()}:\n\nSua jornada no Dia ${dayId} revela um padrão intrincado de funcionamento mental. Ao responder a estas 9 camadas de inquisição, você descascou a primeira superfície do que chama de 'eu'. O diagnóstico processado indica que sua mente utiliza a reatividade como um mecanismo de defesa contra o desconhecido. \n\n${".".repeat(2500)}\n\nESTE É O SEU PONTO DE RUPTURA. A partir daqui, a percepção não é mais opcional. Você agora carrega a responsabilidade da visão. O que foi visto não pode ser desvisto. Sua mente tentará retornar ao conforto do automático, mas a semente da dúvida consciente foi plantada. O próximo passo exige que você não apenas veja, mas que decida quem realmente está no comando.`;
+    const text = `ANÁLISE PROFUNDA PARA ${user?.name?.toUpperCase() || 'USUÁRIO'}:\n\nSua jornada no Dia ${dayId} revela um padrão intrincado de funcionamento mental. Ao responder a estas 9 camadas de inquisição, você descascou a primeira superfície do que chama de 'eu'. O diagnóstico processado indica que sua mente utiliza a reatividade como um mecanismo de defesa contra o desconhecido. \n\n${".".repeat(2500)}\n\nESTE É O SEU PONTO DE RUPTURA. A partir daqui, a percepção não é mais opcional. Você agora carrega a responsabilidade da visão. O que foi visto não pode ser desvisto. Sua mente tentará retornar ao conforto do automático, mas a semente da dúvida consciente foi plantada. O próximo passo exige que você não apenas veja, mas que decida quem realmente está no comando.`;
     return text;
   };
 
   const handleFinish = () => {
     const id = parseInt(dayId);
     completeDay(id);
-    addPoints(200); // 100 da aula + 100 do quiz/conclusão
+    addPoints(200); 
     playSound('complete');
     confetti({
       particleCount: 200,
@@ -137,7 +137,7 @@ function DayJourney() {
     setStep("conclusion");
   };
 
-  const handleNextStep = (next: any) => {
+  const handleNextStep = (next: "video" | "protocol" | "exercise" | "mission" | "quiz" | "conclusion") => {
     playSound('click');
     setStep(next);
   };
