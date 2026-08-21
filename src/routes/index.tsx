@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { playSound } from "../lib/audio";
 import { useJourneyStore } from "../lib/store";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
@@ -27,7 +28,8 @@ function Index() {
   const progress = Math.round((completedDays.length / 7) * 100);
 
   const journeyCards = [
-    { id: 0, title: "SEJA BEM VINDOS", subtitle: "Introdução", unlocked: true },
+    { id: 10, title: "COMUNIDADE NEUROCONSCIÊNCIA", subtitle: "Primeiro Passo", unlocked: true, external: "https://comunidade-gratuito.lovable.app/" },
+    { id: 0, title: "SEJA BEM VINDOS", subtitle: "Boas Vindas", unlocked: true },
     { id: 1, title: "A MENTE QUE VOCÊ NÃO ESTÁ PERCEBENDO", subtitle: "Dia 1", unlocked: true },
     { id: 2, title: "QUANDO O PENSAMENTO COMEÇA A DIRIGIR VOCÊ", subtitle: "Dia 2", unlocked: completedDays.includes(1) },
     { id: 3, title: "O CÓDIGO POR TRÁS DOS SEUS PADRÕES", subtitle: "Dia 3", unlocked: completedDays.includes(2) },
@@ -35,6 +37,10 @@ function Index() {
     { id: 5, title: "A MUDANÇA COMEÇA QUANDO VOCÊ ENXERGA OUTRA POSSIBILIDADE", subtitle: "Dia 5", unlocked: completedDays.includes(4) },
     { id: 6, title: "QUANDO CONSCIÊNCIA VIRA ESCOLHA", subtitle: "Dia 6", unlocked: completedDays.includes(5) },
     { id: 7, title: "VOCÊ NÃO PRECISA SER REFÉM DA SUA MENTE", subtitle: "Dia 7", unlocked: completedDays.includes(6) },
+    { id: 8, title: "CENTRO DE COMANDO OPERACIONAL", subtitle: "Ferramenta", unlocked: completedDays.includes(7), external: "https://mentor-primario.lovable.app/" },
+    { id: 9, title: "ROBÔ DECODIFICADOR DE LIVROS", subtitle: "Livros", unlocked: completedDays.includes(7), external: "https://neuroleitor.lovable.app/" },
+    { id: 11, title: "MÉTODO NEUROLEITURA", subtitle: "Absorva Conhecimento", unlocked: completedDays.includes(7) },
+    { id: 12, title: "INSTITUTO NEUROCONSCIÊNCIA", subtitle: "Próximo Passo", unlocked: completedDays.includes(7) },
   ];
 
   return (
@@ -49,15 +55,17 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         <div className="absolute bottom-10 left-6 right-6 space-y-4">
           <span className="text-primary font-bold tracking-widest text-sm">PREMIUM EXPERIENCE</span>
-          <h1 className="text-4xl font-extrabold leading-tight">Desbloqueie o Poder da Sua Mente</h1>
-          <p className="text-muted-foreground text-sm max-w-md">Olá, {user.name}. Sua jornada de transformação começou.</p>
+          <h1 className="text-4xl font-black leading-tight tracking-tighter uppercase italic">Desbloqueie o Poder da Sua Mente</h1>
+          <p className="text-muted-foreground text-[10px] max-w-md uppercase tracking-[0.2em] font-bold">7 dias para sair do piloto automático e perceber os padrões que governam sua experiência.</p>
+          <p className="text-primary text-xs font-bold uppercase italic tracking-widest">Olá, {user.name.split(' ')[0]}.</p>
           <div className="flex items-center gap-4 pt-2">
             <Link 
               to="/day/$dayId" 
               params={{ dayId: "0" }}
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-md flex items-center gap-2 font-bold hover:scale-105 transition-transform"
+              onClick={() => playSound('click')}
+              className="bg-primary text-primary-foreground px-6 py-3 rounded-md flex items-center gap-2 font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform shadow-xl shadow-primary/20"
             >
-              <Play size={20} fill="currentColor" /> Assistir Agora
+              <Play size={16} fill="currentColor" /> Assistir Agora
             </Link>
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Progresso Total</span>
@@ -76,45 +84,72 @@ function Index() {
             <Zap className="text-primary" size={20} /> Sua Jornada de 7 Dias
           </h2>
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
-            {journeyCards.map((card) => (
-              <Link
-                key={card.id}
-                to="/day/$dayId"
-                params={{ dayId: card.id.toString() }}
-                disabled={!card.unlocked}
-                className={`relative flex-shrink-0 w-[200px] aspect-[4/5] rounded-lg overflow-hidden snap-start transition-all ${
-                  card.unlocked ? 'hover:scale-105 cursor-pointer border border-primary/20' : 'opacity-40 grayscale pointer-events-none border border-transparent'
-                }`}
-              >
-                <img src={thumbnailAsset.url} alt={card.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3">
-                  <span className="text-[10px] font-bold text-primary uppercase">{card.subtitle}</span>
-                  <p className="text-xs font-bold leading-tight mt-0.5 line-clamp-2">{card.title}</p>
+            {journeyCards.map((card) => {
+              const CardContent = (
+                <div className={`relative flex-shrink-0 w-[220px] aspect-[4/5] rounded-lg overflow-hidden snap-start transition-all border-2 border-transparent ${
+                  card.unlocked ? 'hover:scale-105 cursor-pointer hover:border-primary/50 group shadow-2xl' : 'opacity-40 grayscale pointer-events-none'
+                }`}>
+                  <img src={thumbnailAsset.url} alt={card.title} className="w-full h-full object-cover brightness-75 group-hover:brightness-100 transition-all" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 space-y-1">
+                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">{card.subtitle}</span>
+                    <p className="text-xs font-black leading-tight uppercase italic tracking-tighter line-clamp-2">{card.title}</p>
+                    {card.unlocked && <div className="h-0.5 w-0 group-hover:w-full bg-primary transition-all duration-500" />}
+                  </div>
                 </div>
-              </Link>
-            ))}
+              );
+
+              return card.external ? (
+                <a key={card.id} href={card.external} target="_blank" rel="noreferrer" onClick={() => playSound('click')}>
+                  {CardContent}
+                </a>
+              ) : (
+                <Link
+                  key={card.id}
+                  to="/day/$dayId"
+                  params={{ dayId: card.id.toString() }}
+                  disabled={!card.unlocked}
+                  onClick={() => playSound('click')}
+                >
+                  {CardContent}
+                </Link>
+              );
+            })}
           </div>
         </section>
 
         {/* comando, livros, comunidade */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <a href="https://comunidade-gratuito.lovable.app/" target="_blank" rel="noreferrer" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
-            <Users className="text-primary group-hover:scale-110 transition-transform" />
-            <span className="text-xs font-bold uppercase">Comunidade</span>
-          </a>
-          <a href="https://mentor-primario.lovable.app/" target="_blank" rel="noreferrer" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
-            <Shield className="text-primary group-hover:scale-110 transition-transform" />
-            <span className="text-xs font-bold uppercase">Comando</span>
-          </a>
-          <a href="https://neuroleitor.lovable.app/" target="_blank" rel="noreferrer" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
-            <BookOpen className="text-primary group-hover:scale-110 transition-transform" />
-            <span className="text-xs font-bold uppercase">Livros</span>
-          </a>
-          <Link to="/metaphor" className="bg-card p-4 rounded-xl border border-border flex flex-col items-center justify-center gap-3 text-center group hover:border-primary/50 transition-colors">
-            <LayoutGrid className="text-primary group-hover:scale-110 transition-transform" />
-            <span className="text-xs font-bold uppercase">Metáfora</span>
-          </Link>
+        <section className="space-y-4">
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground px-2">Bônus Premium</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="https://metodoneuroconfronto.lovable.app/" target="_blank" rel="noreferrer" onClick={() => playSound('click')} className="bg-card/50 p-6 rounded-xl border border-border flex items-center gap-4 group hover:border-primary/50 transition-all hover:bg-card">
+              <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:scale-110 transition-transform">
+                <Shield size={24} />
+              </div>
+              <div className="text-left">
+                <span className="text-[10px] font-black uppercase tracking-widest text-primary">App</span>
+                <p className="text-xs font-bold uppercase tracking-tighter italic">12 Confronto</p>
+              </div>
+            </a>
+            <a href="https://inner-fortress-mind-forge.lovable.app/challenge" target="_blank" rel="noreferrer" onClick={() => playSound('click')} className="bg-card/50 p-6 rounded-xl border border-border flex items-center gap-4 group hover:border-primary/50 transition-all hover:bg-card">
+              <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:scale-110 transition-transform">
+                <Zap size={24} />
+              </div>
+              <div className="text-left">
+                <span className="text-[10px] font-black uppercase tracking-widest text-primary">App</span>
+                <p className="text-xs font-bold uppercase tracking-tighter italic">Fortaleza Interior</p>
+              </div>
+            </a>
+            <a href="https://destiny-unlocked-app.lovable.app/" target="_blank" rel="noreferrer" onClick={() => playSound('click')} className="bg-card/50 p-6 rounded-xl border border-border flex items-center gap-4 group hover:border-primary/50 transition-all hover:bg-card">
+              <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:scale-110 transition-transform">
+                <Trophy size={24} />
+              </div>
+              <div className="text-left">
+                <span className="text-[10px] font-black uppercase tracking-widest text-primary">App</span>
+                <p className="text-xs font-bold uppercase tracking-tighter italic">Revele Seu Destino</p>
+              </div>
+            </a>
+          </div>
         </section>
 
         {/* Stats / Points */}
