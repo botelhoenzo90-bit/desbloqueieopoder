@@ -118,7 +118,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="dark min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-white text-gray-900">
         <style>{`
           #lovable-badge { display: none !important; }
           ::-webkit-scrollbar { display: none; }
