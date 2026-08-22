@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Desbloqueie o Poder da Sua Mente" },
-      { name: "description", content: "7 dias para sair do piloto automático e descobrir novas possibilidades." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Desbloqueie o Poder da Sua Mente" },
-      { property: "og:description", content: "Jornada interativa de 7 dias de desenvolvimento pessoal." },
+      { title: "Cicatrizes | Estética de Luxo e Harmonização Facial" },
+      { name: "description", content: "Clínica de estética premium no Brasil focada em harmonização facial e procedimentos avançados para mulheres." },
+      { name: "author", content: "Cicatrizes" },
+      { property: "og:title", content: "Cicatrizes | Estética de Luxo" },
+      { property: "og:description", content: "Realce sua beleza natural com nossos protocolos exclusivos de harmonização facial." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
