@@ -17,6 +17,7 @@ function Index() {
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-[#FFD7E5] selection:text-[#D4AF37]">
       <Hero />
       <About />
+      <Differentials />
       
       {/* Testimonials Placeholder for now */}
       <section className="py-24 bg-[#FAFAFA] px-6">
@@ -37,6 +38,7 @@ function Index() {
       </section>
 
       <Services />
+      <HowItWorks />
 
       {/* CTA Final */}
       <section className="py-32 bg-[#FFD7E5]/20 px-6 text-center">
