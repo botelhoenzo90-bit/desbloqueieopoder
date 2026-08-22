@@ -3,6 +3,8 @@ import { About } from "../components/aesthetic/About";
 import { Services } from "../components/aesthetic/Services";
 import { Footer } from "../components/aesthetic/Footer";
 import { WhatsAppButton } from "../components/aesthetic/WhatsAppButton";
+import { Differentials } from "../components/aesthetic/Differentials";
+import { HowItWorks } from "../components/aesthetic/HowItWorks";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
