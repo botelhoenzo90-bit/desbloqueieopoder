@@ -19,7 +19,6 @@ function Index() {
       <About />
       <Differentials />
       
-      {/* Testimonials Placeholder for now */}
       <section className="py-24 bg-[#FAFAFA] px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-sm font-bold tracking-[0.3em] text-[#D4AF37] uppercase">Experiências</h2>
@@ -40,7 +39,6 @@ function Index() {
       <Services />
       <HowItWorks />
 
-      {/* CTA Final */}
       <section className="py-32 bg-[#FFD7E5]/20 px-6 text-center">
         <div className="max-w-4xl mx-auto space-y-8">
           <h2 className="text-5xl font-serif font-light">Pronta para sua <span className="text-[#D4AF37] italic">melhor</span> versão?</h2>
