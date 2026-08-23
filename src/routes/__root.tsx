@@ -77,11 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Cicatrizes | Estética de Luxo e Harmonização Facial" },
-      { name: "description", content: "Clínica de estética premium no Brasil focada em harmonização facial e procedimentos avançados para mulheres." },
-      { name: "author", content: "Cicatrizes" },
-      { property: "og:title", content: "Cicatrizes | Estética de Luxo" },
-      { property: "og:description", content: "Realce sua beleza natural com nossos protocolos exclusivos de harmonização facial." },
+      { title: "FitWay | A Melhor Academia de Curitiba" },
+      { name: "description", content: "Transforme seu potencial em poder na FitWay. Academia moderna em Curitiba com infraestrutura premium e equipamentos de elite." },
+      { property: "og:title", content: "FitWay | Academia Premium Curitiba" },
+      { property: "og:description", content: "A experiência definitiva em treino e performance no coração de Curitiba." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -118,7 +117,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-white text-gray-900">
+      <div className="min-h-screen bg-background text-foreground">
         <style>{`
           #lovable-badge { display: none !important; }
           ::-webkit-scrollbar { display: none; }
