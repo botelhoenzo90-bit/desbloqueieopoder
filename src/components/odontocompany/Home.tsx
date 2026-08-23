@@ -2,6 +2,7 @@ import React from 'react';
 import { Hero } from '@/components/odontocompany/Hero';
 import { Features } from '@/components/odontocompany/Features';
 import { Services } from '@/components/odontocompany/Services';
+import { PricingPlans } from '@/components/odontocompany/landing/PricingPlans';
 import { FloatingWhatsApp, WhatsAppButton } from '@/components/odontocompany/CTAs';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Clock, Mail } from 'lucide-react';
@@ -15,7 +16,8 @@ export const Home = () => {
             ODONTO<span className="text-slate-900">COMPANY</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-bold text-slate-600 uppercase tracking-widest">
-            <a href="#" className="hover:text-primary transition-colors">Início</a>
+            <a href="/" className="hover:text-primary transition-colors">Início</a>
+            <a href="/?view=login" className="hover:text-primary transition-colors">Entrar</a>
             <a href="#" className="hover:text-primary transition-colors">Serviços</a>
             <a href="#" className="hover:text-primary transition-colors">Clínica</a>
             <a href="#" className="hover:text-primary transition-colors">Localização</a>
@@ -81,6 +83,8 @@ export const Home = () => {
       </section>
 
       <Services />
+      
+      <PricingPlans />
 
       {/* Location Section */}
       <section className="py-24 bg-white">
