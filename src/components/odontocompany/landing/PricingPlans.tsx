@@ -29,7 +29,7 @@ const plans = [
 
 export const PricingPlans = () => {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section id="planos" className="py-24 bg-white relative overflow-hidden">
       <div className="container px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-6">

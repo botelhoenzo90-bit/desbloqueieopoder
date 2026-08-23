@@ -17,10 +17,8 @@ export const Home = () => {
           </div>
           <div className="hidden md:flex gap-8 text-sm font-bold text-slate-600 uppercase tracking-widest">
             <a href="/" className="hover:text-primary transition-colors">Início</a>
-            <a href="/?view=login" className="hover:text-primary transition-colors">Entrar</a>
-            <a href="#" className="hover:text-primary transition-colors">Serviços</a>
-            <a href="#" className="hover:text-primary transition-colors">Clínica</a>
-            <a href="#" className="hover:text-primary transition-colors">Localização</a>
+            <a href="/?view=login" className="hover:text-primary transition-colors">Portal do Cliente</a>
+            <a href="#planos" className="hover:text-primary transition-colors">Planos</a>
           </div>
           <WhatsAppButton className="hidden sm:flex h-10 px-6 text-xs" />
         </div>
