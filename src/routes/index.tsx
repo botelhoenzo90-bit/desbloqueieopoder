@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import confetti from "canvas-confetti";
+import "../app.css";
 import { ArrowRight, BarChart3, BookOpen, Check, CheckCircle2, ChevronDown, ChevronLeft, Clock3, Copy, Flame, Home, LayoutGrid, Lightbulb, LogOut, Menu, MessageCircle, Plus, RotateCcw, Search, Settings, Sparkles, Target, Trash2, Trophy, X, Zap } from "lucide-react";
 
 type Deadline="1 semana"|"1 mês"|"3 meses"|"6 meses"|"1 ano";
